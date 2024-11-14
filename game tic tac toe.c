@@ -15,13 +15,13 @@ void printBoard(char board[SIZE][SIZE]) {
 }
 
 int checkWin(char board[SIZE][SIZE], char player) {
-    // Cek baris dan kolom
+    
     for (int i = 0; i < SIZE; i++) {
         if (board[i][0] == player && board[i][1] == player && board[i][2] == player) return 1;
         if (board[0][i] == player && board[1][i] == player && board[2][i] == player) return 1;
     }
 
-    // Cek diagonal
+    
     if (board[0][0] == player && board[1][1] == player && board[2][2] == player) return 1;
     if (board[0][2] == player && board[1][1] == player && board[2][0] == player) return 1;
 
@@ -31,10 +31,10 @@ int checkWin(char board[SIZE][SIZE], char player) {
 int checkDraw(char board[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            if (board[i][j] == ' ') return 0; // Masih ada ruang kosong
+            if (board[i][j] == ' ') return 0; 
         }
     }
-    return 1; // Papan penuh
+    return 1; 
 }
 
 void playGame() {
@@ -53,7 +53,7 @@ void playGame() {
         printf("Player %c, enter row (1-3) and column (1-3): ", currentPlayer);
         scanf("%d %d", &row, &col);
 
-        // Validasi input
+       
         if (row < 1 || row > 3 || col < 1 || col > 3 || board[row-1][col-1] != ' ') {
             printf("Invalid move! Try again.\n");
             continue;
@@ -61,7 +61,7 @@ void playGame() {
 
         board[row-1][col-1] = currentPlayer;
 
-        // Cek apakah ada yang menang
+
         gameWon = checkWin(board, currentPlayer);
         if (gameWon) {
             printBoard(board);
@@ -69,7 +69,7 @@ void playGame() {
             break;
         }
 
-        // Cek apakah seri
+       
         gameDraw = checkDraw(board);
         if (gameDraw) {
             printBoard(board);
@@ -77,7 +77,7 @@ void playGame() {
             break;
         }
 
-        // Ganti pemain
+
         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
 }
